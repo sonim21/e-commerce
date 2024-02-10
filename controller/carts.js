@@ -81,7 +81,7 @@ export const updateCart = async (req, res) => {
         if (existingProductIndex !== -1) { 
             const updatedQuantity = cart.products[existingProductIndex].quantity + quantity;
 
-            if (updatedQuantity <= 0) { //delete cart if it becomes zero
+            if (updatedQuantity <= 0) { 
                 cart.products.splice(existingProductIndex, 1);
             } else {
                 cart.products[existingProductIndex].quantity = updatedQuantity;
