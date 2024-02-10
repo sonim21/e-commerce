@@ -30,7 +30,7 @@ export const checkoutFromCart = async (req, res) => {
         });
 
         await newBuy.save();
-        await Cart.findOneAndUpdate({ userId }, { $set: { products: [] } }); //cart empty after checkout
+        await Cart.findOneAndUpdate({ userId }, { $set: { products: [] } });
 
         return res.status(200).json({ message: 'Checkout successful', data: newBuy });
     } catch (err) {
