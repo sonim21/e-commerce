@@ -113,24 +113,20 @@ export const deleteCart = async (req, res) => {
     try {
         const { userId, productId } = req.body;
 
-        // Find the user's cart
         const cart = await Cart.findOne({ userId });
 
         if (!cart) {
             return res.status(404).json({ message: 'Cart not found' });
         }
 
-        // Find the index of the product in the cart
         const productIndex = cart.products.findIndex(item => item.productId === productId);
 
         if (productIndex === -1) {
             return res.status(404).json({ message: 'Product not found in cart' });
         }
 
-        // Remove the product from the cart
         cart.products.splice(productIndex, 1);
 
-        // Save the updated cart
         await cart.save();
 
         return res.status(200).json({ message: 'Product removed from cart successfully', cart });
