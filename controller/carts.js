@@ -19,7 +19,7 @@ export const addToCart = async (req, res) => {
 
             if (existingProductIndex !== -1) {
                
-                cart.products[existingProductIndex].quantity += quantity; // update product quantity if it already exists
+                cart.products[existingProductIndex].quantity += quantity; 
             } else {
     
                 cart.products.push({ productId, quantity });
@@ -28,7 +28,7 @@ export const addToCart = async (req, res) => {
 
         await cart.save();
 
-        const product = await Product.findById(productId); //display product details
+        const product = await Product.findById(productId); 
 
         return res.status(200).json({ message: 'Product added to cart successfully', data: { cart, product } });
     } catch (err) {
@@ -78,7 +78,7 @@ export const updateCart = async (req, res) => {
 
         const existingProductIndex = cart.products.findIndex(product => product.productId === productId);
 
-        if (existingProductIndex !== -1) { //decrement
+        if (existingProductIndex !== -1) { 
             const updatedQuantity = cart.products[existingProductIndex].quantity + quantity;
 
             if (updatedQuantity <= 0) { //delete cart if it becomes zero
